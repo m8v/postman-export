@@ -11,11 +11,23 @@ inquirer.registerPrompt('search-list', require('inquirer-search-list'));
 inquirer.registerPrompt('checkbox-plus', require('inquirer-checkbox-plus-prompt'));
 
 function displayWelcomeBanner() {
-    console.log('\n' + chalk.bold.cyan('╭────────────────────────────╮'));
-    console.log(chalk.bold.cyan('│  ') + chalk.bold.yellow('Postman OpenAPI Exporter') + chalk.bold.cyan('  │'));
-    console.log(chalk.bold.cyan('│  ') + chalk.bold.white('Version 1.1.0') + chalk.bold.cyan('             │'));
-    console.log(chalk.bold.cyan('│  ') + chalk.bold.magenta('@m8v') + chalk.bold.cyan('                    │'));
-    console.log(chalk.bold.cyan('╰────────────────────────────╯\n'));
+    const title = 'Postman OpenAPI Exporter';
+    const version = 'Version 1.1.0';
+    const author = '@m8v';
+    
+    // Box width is determined by the longest line (title)
+    const boxWidth = title.length + 4; // 4 = 2 spaces padding + 2 borders
+    const line = '─'.repeat(boxWidth - 2);
+    
+    // Center-align shorter lines
+    const versionPadding = ' '.repeat(boxWidth - version.length - 3);
+    const authorPadding = ' '.repeat(boxWidth - author.length - 3);
+    
+    console.log('\n' + chalk.bold.cyan(`╭${line}╮`));
+    console.log(chalk.bold.cyan('│ ') + chalk.bold.yellow(title) + chalk.bold.cyan(' │'));
+    console.log(chalk.bold.cyan('│ ') + chalk.bold.white(version) + chalk.bold.cyan(versionPadding + '│'));
+    console.log(chalk.bold.cyan('│ ') + chalk.bold.magenta(author) + chalk.bold.cyan(authorPadding + '│'));
+    console.log(chalk.bold.cyan(`╰${line}╯\n`));
 }
 
 async function selectWorkspace(apiKey) {
